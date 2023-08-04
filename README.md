@@ -26,16 +26,9 @@ The file named D ICD DIAGNOSES.csv.gz contain description of the ICD-9 codes in 
 
 Set the number of topics K to 5. Set the hyperparameters α = 1 and β = 0.001 for the document topic Dirichlet prior and the ICD-9 topic Dirichlet prior, respectively. 
 
-As shown in the equations below, your implementation involves 3 key updates: (1) update the K x 1 topic distribution of $z_{id}$ for each ICD code i from each patient d, (3) update $n_{.dk}$ for the patients-by-topics count matrix (i.e., the D x K count matrix), (4) update $n_{w.k$}$ for the ICDs-bytopics counts (i.e., the M x K count matrix): 
-
+As shown in the equations below, your implementation involves 3 key updates: (1) update the K x 1 topic distribution of $z_{id}$ for each ICD code i from each patient d, (3) update $n_{.dk}$ for the patients-by-topics count matrix (i.e., the D x K count matrix), (4) update $n_{w.k}$ for the ICDs-bytopics counts (i.e., the M x K count matrix): 
  
 Ran 100 iterations of your collapsed Gibbs sampling algorithm, which took one minute. Normalize the final ICDs-by-topics and the patients-by-topics matrix, respectively: 
-
- 
-
- 
-
- 
 
 ## Visualizing the top ICD codes under each topic 
 
