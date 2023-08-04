@@ -24,26 +24,38 @@ The file named D ICD DIAGNOSES.csv.gz contain description of the ICD-9 codes in 
 
 ## Implementing collapsed Gibbs sampling LDA 
 
+![collapsed Gibbs sampling LDA](https://github.com/Sagarnandeshwar/Collapsed_Gibbs_Sampling_LDA/blob/main/image/e.png)
+
 Set the number of topics K to 5. Set the hyperparameters α = 1 and β = 0.001 for the document topic Dirichlet prior and the ICD-9 topic Dirichlet prior, respectively. 
 
 As shown in the equations below, your implementation involves 3 key updates: (1) update the K x 1 topic distribution of $z_{id}$ for each ICD code i from each patient d, (3) update $n_{.dk}$ for the patients-by-topics count matrix (i.e., the D x K count matrix), (4) update $n_{w.k}$ for the ICDs-bytopics counts (i.e., the M x K count matrix): 
+
+![equation](https://github.com/Sagarnandeshwar/Collapsed_Gibbs_Sampling_LDA/blob/main/image/e2.png)
  
 Ran 100 iterations of your collapsed Gibbs sampling algorithm, which took one minute. Normalize the final ICDs-by-topics and the patients-by-topics matrix, respectively: 
+
+![equation2](https://github.com/Sagarnandeshwar/Collapsed_Gibbs_Sampling_LDA/blob/main/image/e3.png)
 
 ## Visualizing the top ICD codes under each topic 
 
 For each topic k, we choose the top 10 ICD-9 codes defined under the distribution $ϕ_k$. Concatenate the top 10 ICD codes per topic together, resulting in a 50 x 5 ICDs-by-topics matrix as 
 
+![1](https://github.com/Sagarnandeshwar/Collapsed_Gibbs_Sampling_LDA/blob/main/image/1.png)
+
 Topic 1 and topic 5 have ICD codes prefix 331 as the top code, implying their connections with Alzheimer’s disease. Topic 2 has the top second code beginning with 332 (i.e., Paralysis agitans), which codes Parkinson’s disease although we see comorbidity code 4280 CHF for Congestive heart failure, unspecified (https://icdlist.com/icd-9/428.0), appearing as the top 1 code. Interestingly, topic 4 involves code 294 w/o behavioral disturbance and the target code 340 for multiple sclerosis (among others). Topic 3 does not have any of the target codes and contain codes for infection such as urinary tract infection (5990), pneumonia (486), etc. 
 
 ## Correlating topics with the target ICD codes 
-To further make sense of the 5 topics, compute the normalized patient-by-topic mixture $θ_{dk}$ for each patient d and topic k using Eq (6). Then, correlate each topic from the N x 5 patient topic mixtures θ with each binary target ICD code (331,332,340) over the N patients. 
+To further make sense of the 5 topics, compute the normalized patient-by-topic mixture $θ_{dk}$ for each patient d and topic k using Eq (6). Then, correlate each topic from the N x 5 patient topic mixtures θ with each binary target ICD code (331,332,340) over the N patients.
+
+![2](https://github.com/Sagarnandeshwar/Collapsed_Gibbs_Sampling_LDA/blob/main/image/2.png)
 
 Indeed, we see that topic 1 and 5 are positively correlated with ICD 331, topic 2 correlates with ICD 332, topic 4 correlates with code 340, and topic 3 does not correlate with any of the target codes
 
 ## Visualizing patient topic mixtures 
 
-We chose top 100 patients under each topic and display them in a heatmap as 
+We chose top 100 patients under each topic and display them in a heatmap
+
+![3](https://github.com/Sagarnandeshwar/Collapsed_Gibbs_Sampling_LDA/blob/main/image/3.png)
 
 Reassuringly, we observe that the top patients with high probabilities under topic 1 and 5 are enriched for ICD codes 331, the top patients under topic 2 and 4 are enriched for ICD codes 332 and 340, respectively. In contrast, top patients under topic 3 do not have any of the 3 target ICD codes. Once again, your heatmap may differ from the one shown below but some of your topics should prioritize patients in one of the 3 disease groups. 
 
